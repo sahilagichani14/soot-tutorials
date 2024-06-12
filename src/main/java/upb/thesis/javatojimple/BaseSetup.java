@@ -21,7 +21,6 @@ public class BaseSetup {
 		// add the analysis to jimple transform pack (jtp)
 		Transform transform = new Transform("jtp.analysis", createAnalysisTransformer());
 		PackManager.v().getPack("jtp").add(transform);
-
 	}
 
 	protected Transformer createAnalysisTransformer(){
@@ -36,11 +35,11 @@ public class BaseSetup {
 		String userdir = System.getProperty("user.dir");
 		//String sootCp = userdir + File.separator + "target" + File.separator + "test-classes"+ File.pathSeparator + "lib" + File.separator + "rt.jar";
 		String sootCp = userdir + File.separator + "target" + File.separator + "classes"+ File.pathSeparator + "lib"+ File.separator+ "rt.jar";
-		Options.v().set_whole_program(true);
+		//Options.v().set_whole_program(true);
 		Options.v().set_soot_classpath(sootCp);
-		Options.v().set_no_bodies_for_excluded(true);
-		Options.v().process_dir();
-		Options.v().set_allow_phantom_refs(true);
+		//Options.v().set_no_bodies_for_excluded(true);
+		//Options.v().process_dir();
+		//Options.v().set_allow_phantom_refs(true);
 		Options.v().setPhaseOption("jb", "use-original-names:true");
 		Options.v().set_prepend_classpath(false);
 		SootClass c = Scene.v().forceResolve(targetTestClassName, SootClass.BODIES);

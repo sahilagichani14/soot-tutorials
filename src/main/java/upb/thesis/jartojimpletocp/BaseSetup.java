@@ -1,10 +1,10 @@
 package upb.thesis.jartojimpletocp;
 
-import analysis.IDELinearConstantAnalysisProblem;
-import analysis.data.DFF;
-import eval.EvalHelper;
-import heros.solver.Pair;
-import solver.JimpleIDESolver;
+//import analysis.IDELinearConstantAnalysisProblem;
+//import analysis.data.DFF;
+//import eval.EvalHelper;
+//import heros.solver.Pair;
+//import solver.JimpleIDESolver;
 import soot.*;
 import soot.jimple.DefinitionStmt;
 import soot.jimple.IntConstant;
@@ -20,7 +20,7 @@ import java.util.*;
 
 public class BaseSetup {
     private static List<SootMethod> entryMethods;
-    private static JimpleIDESolver<?, ?, ?> solver;
+    //private static JimpleIDESolver<?, ?, ?> solver;
     public long defaultPropCount = 0;
 
     public void executeStaticAnalysis(String targetJar) {
@@ -86,40 +86,40 @@ public class BaseSetup {
             @Override
             protected void internalTransform(String phaseName, Map<String, String> options) {
                 JimpleBasedInterproceduralCFG icfg = new JimpleBasedInterproceduralCFG(false);
-                for (SootMethod method : entryMethods) {
-                    System.out.println("started solving from: " + method.getSignature());
-                    IDELinearConstantAnalysisProblem problem = new IDELinearConstantAnalysisProblem(icfg, method, EvalHelper.getThreadCount());
-                    @SuppressWarnings({"rawtypes", "unchecked"})
-                    JimpleIDESolver<?, ?, ?> mSolver = new JimpleIDESolver<>(problem);
-                    mSolver.solve();
-                    solver = mSolver;
-                    mSolver.addFinalResults(method.getSignature());
-                    getResult(mSolver, method);
-                }
-                if (solver != null) {
-                    solver.dumpResults(EvalHelper.getTargetName());
-                }
+//                for (SootMethod method : entryMethods) {
+//                    System.out.println("started solving from: " + method.getSignature());
+//                    IDELinearConstantAnalysisProblem problem = new IDELinearConstantAnalysisProblem(icfg, method, EvalHelper.getThreadCount());
+//                    @SuppressWarnings({"rawtypes", "unchecked"})
+//                    JimpleIDESolver<?, ?, ?> mSolver = new JimpleIDESolver<>(problem);
+//                    mSolver.solve();
+//                    solver = mSolver;
+//                    mSolver.addFinalResults(method.getSignature());
+//                    getResult(mSolver, method);
+//                }
+//                if (solver != null) {
+//                    solver.dumpResults(EvalHelper.getTargetName());
+//                }
 
             }
         };
         return sceneTransformer;
     }
 
-    public Set<Pair<String, Integer>> getResult(Object analysis, SootMethod method) {
-        //SootMethod m = getEntryPointMethod();
-        Map<DFF, Integer> res = null;
-        Set<Pair<String, Integer>> result = new HashSet<>();
-        if (analysis instanceof JimpleIDESolver) {
-            JimpleIDESolver solver = (JimpleIDESolver) analysis;
-            res = (Map<DFF, Integer>) solver.resultsAt(method.getActiveBody().getUnits().getLast());
-            defaultPropCount += solver.propagationCount;
-        }
-        for (Map.Entry<DFF, Integer> e : res.entrySet()) {
-            Pair<String, Integer> pair = new Pair<>(e.getKey().toString(), e.getValue());
-            result.add(pair);
-        }
-        return result;
-    }
+//    public Set<Pair<String, Integer>> getResult(Object analysis, SootMethod method) {
+//        //SootMethod m = getEntryPointMethod();
+//        Map<DFF, Integer> res = null;
+//        Set<Pair<String, Integer>> result = new HashSet<>();
+//        if (analysis instanceof JimpleIDESolver) {
+//            JimpleIDESolver solver = (JimpleIDESolver) analysis;
+//            res = (Map<DFF, Integer>) solver.resultsAt(method.getActiveBody().getUnits().getLast());
+//            defaultPropCount += solver.propagationCount;
+//        }
+//        for (Map.Entry<DFF, Integer> e : res.entrySet()) {
+//            Pair<String, Integer> pair = new Pair<>(e.getKey().toString(), e.getValue());
+//            result.add(pair);
+//        }
+//        return result;
+//    }
 
     /*
      * This method provides the options to soot to analyze the respective classes.
