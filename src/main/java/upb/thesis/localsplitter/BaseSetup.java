@@ -69,6 +69,8 @@ public class BaseSetup {
         Options.v().set_soot_classpath(sootCp);
         List<String> list = new ArrayList<>();
         list.add("jb.cbf");
+        //list.add("jb.ne");
+        //list.add("jj.ne");
         Options.v().set_dump_body(list);
         //Options.v().set_allow_phantom_refs(true);
         //List<String> excluded = Options.v().exclude();
@@ -78,7 +80,47 @@ public class BaseSetup {
         //Options.v().set_include_all(true);
         //System.out.println(Options.v().getPhaseList());
 
-        //Options.v().setPhaseOption("jb", "enabled:false");
+        Options.v().setPhaseOption("jb", "enabled:false");
+//        Options.v().setPhaseOption("jj", "enabled:false");
+//        Options.v().setPhaseOption("wjpp", "enabled:false");
+//        Options.v().setPhaseOption("wspp", "enabled:false");
+//        Options.v().setPhaseOption("wstp", "enabled:false");
+//        Options.v().setPhaseOption("wsop", "enabled:false");
+//        Options.v().setPhaseOption("wjtp", "enabled:false");
+//        Options.v().setPhaseOption("wjop", "enabled:false");
+//        Options.v().setPhaseOption("wjap", "enabled:false");
+//        Options.v().setPhaseOption("stp", "enabled:false");
+//        Options.v().setPhaseOption("sop", "enabled:false");
+//        Options.v().setPhaseOption("jtp", "enabled:false");
+//        Options.v().setPhaseOption("jop", "enabled:false");
+//        Options.v().setPhaseOption("gb", "enabled:false");
+//        Options.v().setPhaseOption("gop", "enabled:false");
+//        Options.v().setPhaseOption("sop", "enabled:false");
+//        Options.v().setPhaseOption("bb", "enabled:false");
+//        Options.v().setPhaseOption("bop", "enabled:false");
+//        Options.v().setPhaseOption("tag", "enabled:false");
+//        Options.v().setPhaseOption("db", "enabled:false");
+
+        //disable all jb body transformers
+//        Options.v().setPhaseOption("jb.dtr", "enabled:false");
+//        Options.v().setPhaseOption("jb.ese", "enabled:false");
+//        Options.v().setPhaseOption("jb.ls", "enabled:false");
+//        Options.v().setPhaseOption("jb.sils", "enabled:false");
+//        Options.v().setPhaseOption("jb.a", "enabled:false");
+//        Options.v().setPhaseOption("jb.ule", "enabled:false");
+//        Options.v().setPhaseOption("jb.tr", "enabled:false");
+//        Options.v().setPhaseOption("jb.ulp", "enabled:false");
+//        Options.v().setPhaseOption("jb.lns", "enabled:false");
+//        Options.v().setPhaseOption("jb.cp", "enabled:false");
+//        Options.v().setPhaseOption("jb.dae", "enabled:false");
+//        Options.v().setPhaseOption("jb.cp-ule", "enabled:false");
+//        Options.v().setPhaseOption("jb.lp", "enabled:false");
+//        Options.v().setPhaseOption("jb.ne", "enabled:false");
+//        Options.v().setPhaseOption("jb.uce", "enabled:false");
+//        Options.v().setPhaseOption("jb.tt", "enabled:false");
+//        Options.v().setPhaseOption("jb.cbf", "enabled:false");
+
+        //Options.v().setPhaseOption("jb.ne", "enabled:true");
         // Creates a JimpleBody for each method directly from source like its done in SootUp
         Options.v().setPhaseOption("jj","enabled:true");
         Options.v().setPhaseOption("jj", "use-original-names:true");
