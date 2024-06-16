@@ -82,9 +82,11 @@ public class TextComparisonTool extends JFrame {
             FileInputStream fis1 = null;
             FileInputStream fis2 = null;
             try {
-                fis1 = new FileInputStream("sootOutput/upb.thesis.RQ1.JB_CBF.JB_CBF/void conditionalBranchFolderTest()/jb.cbf.in");
+                //fis1 = new FileInputStream("sootOutput/upb.thesis.RQ1.JB_CBF.JB_CBF/void conditionalBranchFolderTest()/jb.cbf.in");
+                fis1 = new FileInputStream("sootOutput/upb.thesis.RQ1.JB_LS.JB_LS/void localSplitterTest()/jb.cbf.in");
                 String jimple1 = IOUtils.toString(fis1, "UTF-8");
-                fis2 = new FileInputStream("sootOutput/upb.thesis.RQ1.JB_CBF.JB_CBF/void conditionalBranchFolderTest()/jb.cbf.out");
+                //fis2 = new FileInputStream("sootOutput/upb.thesis.RQ1.JB_CBF.JB_CBF/void conditionalBranchFolderTest()/jb.cbf.out");
+                fis2 = new FileInputStream("sootOutput/upb.thesis.RQ1.JB_LS.JB_LS/void localSplitterTest()/jb.cbf.out");
                 String jimple2 = IOUtils.toString(fis2, "UTF-8");
                 tool.compareTexts(jimple1, jimple2);
             } catch (FileNotFoundException e) {

@@ -1,4 +1,4 @@
-package upb.thesis.localsplitter;
+package upb.thesis.bodytransformer;
 
 public class Target {
     public static void main(String[] args) {
