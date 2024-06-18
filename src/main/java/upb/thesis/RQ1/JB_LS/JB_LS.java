@@ -61,8 +61,12 @@ public class JB_LS {
 
     //Test Case 7: Error Handling
     void tc7(){
-        int a = 8/0;
-        int b = a + 2;
+        try {
+            int a = 8/0;
+            int b = a + 2;
+        } catch (ArithmeticException ex){
+
+        }
     }
 
     //Test Case 8: Global var
