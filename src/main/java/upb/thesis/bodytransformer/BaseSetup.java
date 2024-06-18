@@ -66,7 +66,7 @@ public class BaseSetup {
         Options.v().set_soot_classpath(sootCp);
         //Options.v().set_time(true);
         List<String> list = new ArrayList<>();
-        list.add("jb.cbf");
+        list.add("jb.ls");
         //list.add("jb.ne");
         //list.add("jj.ne");
         Options.v().set_dump_body(list);
@@ -78,6 +78,7 @@ public class BaseSetup {
         //Options.v().set_include_all(true);
         //System.out.println(Options.v().getPhaseList());
 
+        Options.v().setPhaseOption("bb", "enabled:false"); //bafBody bb bydefault calls bb.lp, bb.ule, bb.ne so disabled
         //Disable all packs
         /*
         Options.v().setPhaseOption("jb", "enabled:false");
@@ -110,7 +111,7 @@ public class BaseSetup {
         Options.v().setPhaseOption("jb.a", "enabled:false"); //Aggregator
         Options.v().setPhaseOption("jb.ule", "enabled:false"); //Unused Local Eliminator
         Options.v().setPhaseOption("jb.tr", "enabled:false"); //Type Assigner
-        Options.v().setPhaseOption("jb.ulp", "enabled:false"); //Unsplit-originals Local Packer
+        Options.v().setPhaseOption("jb.ulp", "enabled:false"); //Unsplit-originals Local    Packer
         Options.v().setPhaseOption("jb.lns", "enabled:false"); //Local Name Standardizer
         Options.v().setPhaseOption("jb.cp", "enabled:false"); // CopyPropagator
         Options.v().setPhaseOption("jb.dae", "enabled:false"); // DeadAssignmentEliminator
