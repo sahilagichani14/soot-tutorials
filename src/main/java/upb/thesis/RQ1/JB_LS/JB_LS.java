@@ -1,95 +1,155 @@
 package upb.thesis.RQ1.JB_LS;
 
 public class JB_LS {
+//
+//    int global = 10;
+//
+//    void tc1() {
+//        int a, b;
+//        a = 1;
+//        b = a;
+//        b = b + 1;
+//    }
 
-    int global = 10;
-
-    //Test Case 1: Simple Assignment
-    void tc1(){
-        int a, b;
-        a = 1;
-        b = a;
-        b = b + 1;
-    }
-
-    //Test Case 2: Compound Assignment
-    void tc2(){
-        int a, b;
-        a = 1;
-        b = a + 3;
-    }
-
-    //Test Case 3: Conditional Statements
-    void tc3(){
-        int a, b;
-        a = 1;
-        if (a == 2){
-            b = 5;
-        } else {
+    void tc1_1() {
+        int a = 0, b, c, d;
+        if (a > 10) {
             b = 10;
+        } else {
+            b = 5;
         }
-        int x = b + 1;
-    }
-
-    //Test Case 4: Loops
-    void tc4(){
-        int a = 0;
-        int b;
-        for (int i = 0; i < 3; i++){
-            b = a + i;
+        if (a + b > 15) {
+            c = a + b;
         }
     }
 
-    //Test Case 5: Switch Case
-    void tc5(){
-        int a = 3;
-        switch (a){
-            case 1: a = a + 1; int b = 1; break;
-            case 2: a = a + 1; b = 2; break;
-            case 3: a = a + 1; b = 3; break;
-            default: a = a - 1;
-        }
-    }
-
-    //Test Case 6: Variable Shadowing
-    void tc6(){
-        {
-            int b = 2;
-        }
-        int b = 5;
-    }
-
-    //Test Case 7: Error Handling
-    void tc7(){
-        try {
-            int a = 8/0;
-            int b = a + 2;
-        } catch (ArithmeticException ex){
-
-        }
-    }
-
-    //Test Case 8: Global var
-    void tc8(){
-        int a = global + 5;
-    }
-
-    //Test Case 9: String Concat
+//    void tc1_2() {
+//        int a = 0, b, c;
+//        b = a;
+//        c = b;
+//        a = c;
+//    }
+//
+//    void tc1_3() {
+//        {
+//            int i = 10, a;
+//        }
+//        for (int i = 5; i < 10; i++) {
+//            System.out.println(i);
+//        }
+//    }
+//
+//    void tc1_4() {
+//        int i = 5;
+//        while (i > 3) {
+//            i = i * 2;
+//        }
+//    }
+//
+//    void tc1_5() {
+//        int i = 0;
+//        if (i > 5) {
+//            i = 10;
+//        } else {
+//            i = 34;
+//        }
+//        while (i > 3) {
+//            i = i * 2;
+//        }
+//    }
+//
+//    void tc1_6() {
+//        int i;
+//        if (global==5) {
+//            i = 10;
+//        } else {
+//            i = 34;
+//        }
+//        while (i > 30) {
+//            i = i * 2;
+//        }
+//    }
+//
+//    void tc2() {
+//        int a, b;
+//        a = 1;
+//        b = a + 3;
+//    }
+//
+//    void tc3() {
+//        int a, b;
+//        a = 1;
+//        if (a == 2) {
+//            b = 5;
+//        } else {
+//            b = 10;
+//        }
+//        int x = b + 1;
+//    }
+//
+//    void tc4() {
+//        int a = 0;
+//        int b;
+//        for (int i = 0; i < 3; i++) {
+//            b = a + i;
+//        }
+//    }
+//
+//    void tc5() {
+//        int a = 3;
+//        switch (a) {
+//            case 1:
+//                a = a + 1;
+//                int b = 1;
+//                break;
+//            case 2:
+//                a = a + 1;
+//                b = 2;
+//                break;
+//            case 3:
+//                a = a + 1;
+//                b = 3;
+//                break;
+//            default:
+//                a = a - 1;
+//        }
+//    }
+//
+//    void tc6() {
+//        {
+//            int b = 2;
+//        }
+//        int b = 5;
+//    }
+//
+//    void tc7() {
+//        try {
+//            int a = 8 / 0;
+//            int b = a + 2;
+//        } catch (ArithmeticException ex) {
+//
+//        }
+//    }
+//
+//    void tc8() {
+//        int a = global + 5;
+//    }
+//
 //    void tc9(){
 //        String x = "abc";
 //        String y = "bcd";
 //        String z = x + y;
 //    }
-
-    void localSplitterTest(){
-        int x = 0;
-        if (x > 0){
-            x++;
-        } else if (x + 10 > 21){
-            x--;
-        } else {
-            System.out.println("Do Nothing");
-        }
-    }
+//
+//    void localSplitterTest() {
+//        int x = 0;
+//        if (x > 0) {
+//            x++;
+//        } else if (x + 10 > 21) {
+//            x--;
+//        } else {
+//            System.out.println("Do Nothing");
+//        }
+//    }
 
 }

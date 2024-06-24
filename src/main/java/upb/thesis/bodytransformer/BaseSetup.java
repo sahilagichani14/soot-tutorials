@@ -63,11 +63,13 @@ public class BaseSetup {
         String userdir = System.getProperty("user.dir");
         //String sootCp = userdir + File.separator + "target" + File.separator + "test-classes"+ File.pathSeparator + "lib" + File.separator + "rt.jar";
         String sootCp = userdir + File.separator + "target" + File.separator + "classes" + File.pathSeparator + "lib" + File.separator + "rt.jar";
+        Options.v().set_num_threads(1);
         Options.v().set_soot_classpath(sootCp);
         //Options.v().set_time(true);
         List<String> list = new ArrayList<>();
-        //list.add("jb.ls");
-        list.add("jb.ne");
+        list.add("jb.ls");
+        list.add("jb.lp");
+        //list.add("jb.ne");
         //list.add("jj.ne");
         Options.v().set_dump_body(list);
         //Options.v().set_allow_phantom_refs(true);
@@ -106,7 +108,7 @@ public class BaseSetup {
         //disable all jb body transformers
         Options.v().setPhaseOption("jb.dtr", "enabled:false"); //Duplicate CatchAll Trap Remover
         Options.v().setPhaseOption("jb.ese", "enabled:false"); //Empty Switch Eliminator
-        Options.v().setPhaseOption("jb.ls", "enabled:false"); //LocalSplitter
+        Options.v().setPhaseOption("jb.ls", "enabled:true"); //LocalSplitter
         Options.v().setPhaseOption("jb.sils", "enabled:false"); //Shared Initialization Local Splitter
         Options.v().setPhaseOption("jb.a", "enabled:false"); //Aggregator
         Options.v().setPhaseOption("jb.ule", "enabled:false"); //Unused Local Eliminator
@@ -116,8 +118,8 @@ public class BaseSetup {
         Options.v().setPhaseOption("jb.cp", "enabled:false"); // CopyPropagator
         Options.v().setPhaseOption("jb.dae", "enabled:false"); // DeadAssignmentEliminator
         Options.v().setPhaseOption("jb.cp-ule", "enabled:false"); // UnusedLocalEliminator
-        Options.v().setPhaseOption("jb.lp", "enabled:false"); //Local Packer
-        Options.v().setPhaseOption("jb.ne", "enabled:true"); //No operation Eliminator
+        Options.v().setPhaseOption("jb.lp", "enabled:true"); //Local Packer
+        Options.v().setPhaseOption("jb.ne", "enabled:false"); //No operation Eliminator
         Options.v().setPhaseOption("jb.uce", "enabled:false"); // UnreachableCodeEliminator
         Options.v().setPhaseOption("jb.tt", "enabled:false"); //Trap Tightener
         Options.v().setPhaseOption("jb.cbf", "enabled:false"); // ConditionalBranchFolder
