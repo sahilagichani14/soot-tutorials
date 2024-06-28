@@ -68,7 +68,7 @@ public class BaseSetup {
         //Options.v().set_time(true);
         List<String> list = new ArrayList<>();
         list.add("jb.ls");
-        list.add("jb.lp");
+        //list.add("jb.lp");
         //list.add("jb.ne");
         //list.add("jj.ne");
         Options.v().set_dump_body(list);
@@ -104,11 +104,13 @@ public class BaseSetup {
         Options.v().setPhaseOption("tag", "enabled:false");
         Options.v().setPhaseOption("db", "enabled:false");
          */
+        //Options.v().setPhaseOption("jb", "use-original-names:true");
+        //Options.v().setPhaseOption("jb.ls", "use-original-names:true");
 
         //disable all jb body transformers
         Options.v().setPhaseOption("jb.dtr", "enabled:false"); //Duplicate CatchAll Trap Remover
         Options.v().setPhaseOption("jb.ese", "enabled:false"); //Empty Switch Eliminator
-        Options.v().setPhaseOption("jb.ls", "enabled:true"); //LocalSplitter
+        Options.v().setPhaseOption("jb.ls", "enabled:true");//LocalSplitter
         Options.v().setPhaseOption("jb.sils", "enabled:false"); //Shared Initialization Local Splitter
         Options.v().setPhaseOption("jb.a", "enabled:false"); //Aggregator
         Options.v().setPhaseOption("jb.ule", "enabled:false"); //Unused Local Eliminator
@@ -118,7 +120,7 @@ public class BaseSetup {
         Options.v().setPhaseOption("jb.cp", "enabled:false"); // CopyPropagator
         Options.v().setPhaseOption("jb.dae", "enabled:false"); // DeadAssignmentEliminator
         Options.v().setPhaseOption("jb.cp-ule", "enabled:false"); // UnusedLocalEliminator
-        Options.v().setPhaseOption("jb.lp", "enabled:true"); //Local Packer
+        Options.v().setPhaseOption("jb.lp", "enabled:false"); //Local Packer
         Options.v().setPhaseOption("jb.ne", "enabled:false"); //No operation Eliminator
         Options.v().setPhaseOption("jb.uce", "enabled:false"); // UnreachableCodeEliminator
         Options.v().setPhaseOption("jb.tt", "enabled:false"); //Trap Tightener
