@@ -1,4 +1,4 @@
-package upb.thesis.bodytransformer;
+package upb.thesis.jimpletobytecode;
 
 import soot.*;
 import soot.jimple.JasminClass;
@@ -7,11 +7,12 @@ import soot.options.Options;
 import soot.util.JasminOutputStream;
 
 import java.io.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class BaseSetup {
 
-    public void executeStaticAnalysis(List<String> targetTestClassName) {
+    public void executeStaticAnalysis(List<String> targetTestClassName) throws IOException {
         setupSoot(targetTestClassName);
         registerSootTransformers();
         executeSootTransformers();
@@ -51,16 +52,16 @@ public class BaseSetup {
         //PackManager.v().getPack("jb").add(transform);
     }
 
-    protected Transformer createAnalysisTransformer() {
-        //return new LocalSplitterTransformer();
-        //return LocalSplitter.v();
-        return ConditionalBranchFolder.v();
-    }
+//    protected Transformer createAnalysisTransformer() {
+//        //return new LocalSplitterTransformer();
+//        //return LocalSplitter.v();
+//        return ConditionalBranchFolder.v();
+//    }
 
     /*
      * This method provides the options to soot to analyze the respective classes.
      */
-    protected static void setupSoot(List<String> targetTestClassNames) {
+    protected static void setupSoot(List<String> targetTestClassNames) throws IOException {
         G.reset();
         String userdir = System.getProperty("user.dir");
         //String sootCp = userdir + File.separator + "target" + File.separator + "test-classes"+ File.pathSeparator + "lib" + File.separator + "rt.jar";
@@ -122,7 +123,7 @@ public class BaseSetup {
         Options.v().setPhaseOption("jb.cp", "enabled:false"); // CopyPropagator
         Options.v().setPhaseOption("jb.dae", "enabled:false"); // DeadAssignmentEliminator
         Options.v().setPhaseOption("jb.cp-ule", "enabled:false"); // UnusedLocalEliminator
-        Options.v().setPhaseOption("jb.lp", "enabled:true"); //Local Packer
+        Options.v().setPhaseOption("jb.lp", "enabled:false"); //Local Packer
         Options.v().setPhaseOption("jb.ne", "enabled:false"); //No operation Eliminator
         Options.v().setPhaseOption("jb.uce", "enabled:false"); // UnreachableCodeEliminator
         Options.v().setPhaseOption("jb.tt", "enabled:false"); //Trap Tightener
@@ -150,8 +151,21 @@ public class BaseSetup {
             SootClass c = Scene.v().forceResolve(targetTestClassName, SootClass.BODIES);
             if (c != null)
                 c.setApplicationClass();
+            jimpletobytecode(targetTestClassName);
         }
         Scene.v().loadNecessaryClasses();
+    }
+
+    protected static void jimpletobytecode(String targetTestClassName) throws IOException {
+        SootClass sClass = Scene.v().forceResolve(targetTestClassName, SootClass.BODIES);
+        String fileName = SourceLocator.v().getFileNameFor(sClass, Options.output_format_class);
+        OutputStream streamOut = new JasminOutputStream(new FileOutputStream(fileName));
+        PrintWriter writerOut = new PrintWriter(
+                new OutputStreamWriter(streamOut));
+        JasminClass jasminClass = new soot.jimple.JasminClass(sClass);
+        jasminClass.print(writerOut);
+        writerOut.flush();
+        streamOut.close();
     }
 
 }
