@@ -1,9 +1,12 @@
 package upb.thesis.jimpletobytecode;
 
 import soot.*;
+import soot.baf.BafASMBackend;
 import soot.jimple.JasminClass;
+import soot.jimple.JimpleBody;
 import soot.jimple.toolkits.scalar.ConditionalBranchFolder;
 import soot.options.Options;
+import soot.util.Chain;
 import soot.util.JasminOutputStream;
 
 import java.io.*;
@@ -15,7 +18,7 @@ public class BaseSetup {
     public void executeStaticAnalysis(List<String> targetTestClassName) throws IOException {
         setupSoot(targetTestClassName);
         registerSootTransformers();
-        executeSootTransformers();
+        //executeSootTransformers();
     }
 
     private void executeSootTransformers() {
@@ -83,6 +86,8 @@ public class BaseSetup {
         //Options.v().set_include_all(true);
         //System.out.println(Options.v().getPhaseList());
 
+        //Options.v().set_app(true); //Run in application mode
+
         Options.v().setPhaseOption("bb", "enabled:false"); //bafBody bb bydefault calls bb.lp, bb.ule, bb.ne so disabled
         //Disable all packs
         /*
@@ -117,7 +122,7 @@ public class BaseSetup {
         Options.v().setPhaseOption("jb.sils", "enabled:false"); //Shared Initialization Local Splitter
         Options.v().setPhaseOption("jb.a", "enabled:false"); //Aggregator
         Options.v().setPhaseOption("jb.ule", "enabled:false"); //Unused Local Eliminator
-        Options.v().setPhaseOption("jb.tr", "enabled:false"); //Type Assigner
+        Options.v().setPhaseOption("jb.tr", "enabled:true"); //Type Assigner
         Options.v().setPhaseOption("jb.ulp", "enabled:false"); //Unsplit-originals Local    Packer
         Options.v().setPhaseOption("jb.lns", "enabled:false"); //Local Name Standardizer
         Options.v().setPhaseOption("jb.cp", "enabled:false"); // CopyPropagator
@@ -151,21 +156,51 @@ public class BaseSetup {
             SootClass c = Scene.v().forceResolve(targetTestClassName, SootClass.BODIES);
             if (c != null)
                 c.setApplicationClass();
-            jimpletobytecode(targetTestClassName);
         }
         Scene.v().loadNecessaryClasses();
+        PackManager.v().runPacks();
+        for (String targetTestClassName: targetTestClassNames){
+            jimpletobytecode(targetTestClassName);
+        }
     }
 
     protected static void jimpletobytecode(String targetTestClassName) throws IOException {
-        SootClass sClass = Scene.v().forceResolve(targetTestClassName, SootClass.BODIES);
-        String fileName = SourceLocator.v().getFileNameFor(sClass, Options.output_format_class);
-        OutputStream streamOut = new JasminOutputStream(new FileOutputStream(fileName));
-        PrintWriter writerOut = new PrintWriter(
-                new OutputStreamWriter(streamOut));
-        JasminClass jasminClass = new soot.jimple.JasminClass(sClass);
-        jasminClass.print(writerOut);
-        writerOut.flush();
-        streamOut.close();
+        //Scene.v().loadClassAndSupport("java.lang.Object");
+
+        SootClass sootClass = Scene.v().getSootClass("upb.thesis.RQ1.JB_LP.JB_LP");
+        SootClass sootClassUnsafe = Scene.v().getSootClassUnsafe("upb.thesis.RQ1.JB_LP.JB_LP", false);
+        Chain<SootClass> sootClasses = Scene.v().getClasses();
+        System.out.println(sootClasses);
+        List<SootMethod> sootClassMethods = sootClass.getMethods();
+        System.out.println(sootClassMethods);
+
+//        Chain<SootClass> applicationClasses_afterpacks = Scene.v().getApplicationClasses();
+//        for (SootClass sootcls: applicationClasses_afterpacks){
+//            for (SootMethod sootMethod : sootcls.getMethods()) {
+//                if (sootMethod.hasActiveBody()){
+//                    JimpleBody jimpleBody =  (JimpleBody) sootMethod.getActiveBody();
+//                    System.out.println(jimpleBody);
+//                }
+//                //LocalSplitter.v().transform(jimpleBody);
+//            }
+//        }
+
+        // Doesn't work
+//        String fileName = SourceLocator.v().getFileNameFor(sootClass, Options.output_format_class);
+//        OutputStream streamOut = new JasminOutputStream(new FileOutputStream(fileName));
+//        PrintWriter writerOut = new PrintWriter(new OutputStreamWriter(streamOut));
+//        JasminClass jasminClass = new soot.jimple.JasminClass(sootClass);
+//        jasminClass.print(writerOut);
+//        writerOut.flush();
+//        streamOut.close();
+
+        int java_version = Options.v().java_version();
+        String fileName1 = SourceLocator.v().getFileNameFor(sootClass, Options.output_format_class);
+        OutputStream streamOut1 = new FileOutputStream(fileName1);
+        BafASMBackend backend = new BafASMBackend(sootClass, java_version);
+        backend.generateClassFile(streamOut1);
+        streamOut1.close();
+
     }
 
 }
