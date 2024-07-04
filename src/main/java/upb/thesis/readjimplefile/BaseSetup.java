@@ -21,7 +21,7 @@ public class BaseSetup {
         //String sootCp = userdir + File.separator + "target" + File.separator + "test-classes"+ File.pathSeparator + "lib" + File.separator + "rt.jar";
         String sootCp = userdir + File.separator + "target" + File.separator + "classes" + File.pathSeparator + "lib" + File.separator + "rt.jar";
         Options.v().set_num_threads(1);
-        //Options.v().set_soot_classpath(sootCp);
+        Options.v().set_soot_classpath(sootCp);
 
         String sootJimpleFilesSrcPath = userdir + File.separator + "jimplesrc";
         String rtjarPath = userdir + File.separator + "lib" + File.separator + "rt.jar";
@@ -32,10 +32,11 @@ public class BaseSetup {
 //        List<String> processed_dir = Options.v().process_dir();
 
         Options.v().set_prepend_classpath(true);
+        Options.v().set_allow_phantom_refs(true);
         Options.v().set_output_format(Options.output_format_jimple);
-        Options.v().set_process_dir(java.util.List.of(sootJimpleFilesSrcPath, rtjarPath));
-        Options.v().set_src_prec(Options.src_prec_jimple); // Set the source precedence to Jimple or 3
-        //Options.v().set_output_format(Options.output_format_class); // Set output format to bytecode
+//        Options.v().set_process_dir(java.util.List.of(sootJimpleFilesSrcPath, rtjarPath));
+//        Options.v().set_src_prec(Options.src_prec_jimple); // Set the source precedence to Jimple or 3
+//        Options.v().set_output_format(Options.output_format_class); // Set output format to bytecode
 
 
         //Options.v().set_time(true);
@@ -121,15 +122,15 @@ public class BaseSetup {
         */
 
         //Options.v().setPhaseOption("jj", "use-original-names:true");
-//        for (String targetTestClassName: targetTestClassNames) {
-//            SootClass c = Scene.v().forceResolve(targetTestClassName, SootClass.BODIES);
-//            if (c != null)
-//                c.setApplicationClass();
-//        }
+        for (String targetTestClassName: targetTestClassNames) {
+            SootClass c = Scene.v().forceResolve(targetTestClassName, SootClass.BODIES);
+            if (c != null)
+                c.setApplicationClass();
+        }
         Scene.v().loadNecessaryClasses();
         PackManager.v().runPacks();
         for (String targetTestClassName: targetTestClassNames){
-            //jimpletobytecode(targetTestClassName);
+            jimpletobytecode(targetTestClassName);
         }
     }
 
@@ -163,19 +164,22 @@ public class BaseSetup {
 //        writerOut.flush();
 //        streamOut.close();
 
-        int java_version = Options.v().java_version();
-        String fileName1 = SourceLocator.v().getFileNameFor(sootClass, Options.output_format_class);
-        OutputStream streamOut1 = new FileOutputStream(fileName1);
-        BafASMBackend backend = new BafASMBackend(sootClass, java_version);
-        backend.generateClassFile(streamOut1);
-        streamOut1.close();
+//        int java_version = Options.v().java_version();
+//        String fileName1 = SourceLocator.v().getFileNameFor(sootClass, Options.output_format_class);
+//        OutputStream streamOut1 = new FileOutputStream(fileName1);
+//        BafASMBackend backend = new BafASMBackend(sootClass, java_version);
+//        backend.generateClassFile(streamOut1);
+//        streamOut1.close();
 
         //If we wished to output jimple source instead of a .class file, we would use the following code:
         String fileName = SourceLocator.v().getFileNameFor(sootClass, Options.output_format_jimple);
+//        StringWriter out = new StringWriter();
+//        PrintWriter writerOut = new PrintWriter(out);
         OutputStream streamOut = new FileOutputStream(fileName);
         PrintWriter writerOut = new PrintWriter(new OutputStreamWriter(streamOut));
         Printer.v().printTo(sootClass, writerOut);
         writerOut.flush();
+        //System.out.println(writerOut.toString());
 
     }
 
