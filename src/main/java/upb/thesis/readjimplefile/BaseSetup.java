@@ -44,7 +44,6 @@ public class BaseSetup {
         //list.add("jb.ls");
         //list.add("jb.lp");
         //list.add("jb.ne");
-        //list.add("jj.ne");
         Options.v().set_dump_body(list);
         //Options.v().set_allow_phantom_refs(true);
         //List<String> excluded = Options.v().exclude();

@@ -7,6 +7,7 @@ import soot.options.Options;
 import soot.util.JasminOutputStream;
 
 import java.io.*;
+import java.lang.invoke.StringConcatFactory;
 import java.util.*;
 
 public class BaseSetup {
@@ -67,12 +68,21 @@ public class BaseSetup {
         String sootCp = userdir + File.separator + "target" + File.separator + "classes" + File.pathSeparator + "lib" + File.separator + "rt.jar";
         Options.v().set_num_threads(1);
         Options.v().set_soot_classpath(sootCp);
+
+        // for test case 17 using Strings
+        Options.v().set_prepend_classpath(true);
+        Options.v().set_allow_phantom_refs(true);
+        //Options.v().set_whole_program(true);
+        //Scene.v().addBasicClass(StringConcatFactory.class.getName(), SootClass.SIGNATURES);
+        Scene.v().loadClassAndSupport(StringConcatFactory.class.getName());
+
         //Options.v().set_time(true);
         List<String> list = new ArrayList<>();
         //list.add("jb.ls");
-        list.add("jb.lp");
+        //list.add("jb.lp");
         //list.add("jb.ne");
         //list.add("jj.ne");
+        list.add("jb.tt");
         Options.v().set_dump_body(list);
         //Options.v().set_allow_phantom_refs(true);
         //List<String> excluded = Options.v().exclude();
@@ -122,10 +132,10 @@ public class BaseSetup {
         Options.v().setPhaseOption("jb.cp", "enabled:false"); // CopyPropagator
         Options.v().setPhaseOption("jb.dae", "enabled:false"); // DeadAssignmentEliminator
         Options.v().setPhaseOption("jb.cp-ule", "enabled:false"); // UnusedLocalEliminator
-        Options.v().setPhaseOption("jb.lp", "enabled:true"); //Local Packer
+        Options.v().setPhaseOption("jb.lp", "enabled:false"); //Local Packer
         Options.v().setPhaseOption("jb.ne", "enabled:false"); //No operation Eliminator
         Options.v().setPhaseOption("jb.uce", "enabled:false"); // UnreachableCodeEliminator
-        Options.v().setPhaseOption("jb.tt", "enabled:false"); //Trap Tightener
+        Options.v().setPhaseOption("jb.tt", "enabled:true"); //Trap Tightener
         Options.v().setPhaseOption("jb.cbf", "enabled:false"); // ConditionalBranchFolder
 
         /*
