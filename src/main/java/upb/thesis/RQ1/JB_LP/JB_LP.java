@@ -1,7 +1,8 @@
 package upb.thesis.RQ1.JB_LP;
 
 public class JB_LP {
-    //int global = 10;
+
+    private int a;
 
     public void tc1() {
         int a;
@@ -16,233 +17,101 @@ public class JB_LP {
         int temp;
     }
 
-    public void tc1_() {
-        int a = 0;
-        for (int i=0; i < 5; i++){
-            int temp;
-            a = i;
-        }
-
-        for (int j=0; j < 5; j++){
-            int temp;
-            a = j;
-        }
+    public void tc2(){
+        for (int i = 0; i < 10; i++) {}
+        for (int j = 0; j < 10; j++) {}
     }
-
-    /*
-    private void tc2() {
-        int a;
-        if (10 > 0) {
-            if (20 < 30) {
-                a = 10;
-            } else {
-                a = 20;
-            }
-        } else {
-            a = 30;
-        }
-        int b = a + 5;
-    }
-
-    protected void tc3() {
-        int a = 0;
+    public void tc3(){
         for (int i = 0; i < 10; i++) {
-            a = i * 2;
-        }
-        int b = a + 1;
-    }
-
-    static void tc4() {
-        int a = 0;
-        if (10 > 20) {
-            a = 10;
-        }
-        if (20 > 5) {
-            a = 20;
-        }
-        int b = a + 5;
-    }
-
-    int tc5() {
-        int a;
-        if (10 > 20) {
-            a = 1;
-        } else {
-            a = 2;
-        }
-        int b = a + 1;
-        if (5 == 6) {
-            a = 3;
-        }
-        int c = a + 2;
-        return c;
-    }
-
-    boolean tc6() {
-        int a = 0;
-        for (int i = 0; i < 5; i++) {
-            for (int j = 0; j < 5; j++) {
-                a = i + j;
-            }
-        }
-        int b = a + 1;
-        return false;
-    }
-
-    String tc7() {
-        int a = 0;
-        for (int i = 0; i < 10; i++) {
-            if (a > i) {
-                a = i * 2;
-            } else if (i < 20) {
-                a = i * 3;
-            } else {
-                a = i * 4;
-            }
-        }
-        int b = a + 1;
-        return "Complex";
-    }
-
-    void tc8() {
-        int a = 4;
-        switch (a) {
-            case 1:
-                a = 10;
-                break;
-            case 2:
-                a = 20;
-                break;
-            default:
-                a = 30;
-                break;
-        }
-        int b = a + 5;
-    }
-
-    void tc9() {
-        int a, b, c;
-        if (10 > 20) {
-            //a = 10;
-        } else {
-            a = 5;
-            b = 20;
-        }
-        c = a + b;
-    }
-
-    void tc10() {
-        int a = 0;
-        if (a > 5) {
-            a = getValue1();
-        } else {
-            a = getValue2();
-        }
-        int b = a + 1;
-    }
-
-    private int getValue1() {
-        return 10;
-    }
-
-    private int getValue2() {
-        return 20;
-    }
-
-    void tc11() {
-        int a = 0, b, c, d;
-        if (a > 10) {
-            b = 10;
-        } else {
-            b = 5;
-        }
-        if (b > 15 || a < 5) {
-            c = a + b;
-        }
-        b = b + 5;
-        a = b + 20;
-    }
-
-    void tc12() {
-        int a = 1, b = 2, c = 3, d = 4;
-        while (a + b > 6) {
-            c = d;
+            for (int j = 0; j < 10; j++) {}
         }
     }
-
-    void tc13() {
+    public void tc4(){
+        int a = 1;
+        int b = 2;
+        a = b + 1;
+        int c = 3;
+        int d = 4;
+        c = d + 1;
+    }
+    public void tc5(){
         {
-            int i = 10, a;
+            int x = 5;
         }
-        for (int i = 5; i < 10; i++) {
-            System.out.println(i);
+        {
+            int y = 10;
         }
     }
-
-    void tc14() {
-        int i;
-        if (global == 5) {
-            i = 10;
+    public void tc6(){
+        int[] arr = new int[10];
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = i;
+        }
+        for (int j = 0; j < arr.length; j++) {
+            arr[j] = j * 2;
+        }
+    }
+    public void tc7(){
+        boolean flag = false;
+        if (flag) {
+            int x = 5;
         } else {
-            i = 34;
-        }
-        while (i > 30) {
-            i = i * 2;
+            int y = 10;
         }
     }
-
-    void tc15() {
+    public void tc8(){
+        int i, j=0;
+        for (i = 0; i < 10; i++) {}
+        while (j < 10) {
+            j++;
+        }
+    }
+    public void tc9(){
         try {
-            int a = 8 / 0;
-            int b = a + 2;
-        } catch (ArithmeticException ex) {
-
+            int a = 5;
+        } catch (Exception e) {
+            int b = 10;
         }
     }
-
-    void tc16() {
-        int a = global;
-        int b, c;
-        b = a;
-        c = a + b;
-    }
-
-//    void tc17() {
-//        String x = "abc";
-//        String y = "bcd";
-//        String z = x + y;
-//    }
-
-    void tc18() {
-        int x = 0;
-        if (x > 0) {
-            x++;
-        } else if (x + 10 > 21) {
-            x--;
-        } else {
-            System.out.println("Do Nothing");
+    public void tc10(){
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                int temp = i + j;
+            }
         }
     }
-
-    void tc19() {
+    public void tc11(){
         int a = 0;
-        int b;
-        if (a == 20 ? true : false) {
-            b = 1;
-        } else {
-            b = 2;
+        anotherMethod(a);
+        int b = 1;
+        anotherMethod(b);
+    }
+    public void anotherMethod(int param) {}
+
+    public void tc12(int k){
+        for (int i = 0; i < k; i++) {
+            if (i % 2 == 0) {
+                int a = i;
+            } else {
+                int b = i;
+            }
         }
-        a = a + b + a;
+    }
+    public void tc13(){
+        {
+            int a = 20; // This a shadows the outer a
+        }
+        int a = 10;
+    }
+    public static void tc14(){
+        //static method
+        int a = 1;
+        int b = 2;
+    }
+    public void tc15(){
+        this.a = 1;
+        int a = this.a;
+        int b = a;
     }
 
-    void tc20() {
-        ;
-        if (false){
-            //Nothing
-        }
-        if (true)
-            return;
-        return;
-    }
-     */
 }
